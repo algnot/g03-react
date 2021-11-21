@@ -1,0 +1,25 @@
+.btnLogin{
+    margin-top: 10px;
+    border:2px solid #858585;
+    background-color: transparent;
+    color: #858585;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 1.2rem;
+    border-radius: 20px;
+    transition: .3s;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.btnLogin:hover {
+    background-color: #858585;
+    color: #fff;
+}
+
+.btnLogin svg{
+    width: 25px;
+}

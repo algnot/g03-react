@@ -1,4 +1,144 @@
 .container{
     width: 100vw;
     height: 100vh;
+    display: grid;
+    grid-template-columns: 4fr 3fr;
+}
+
+.leftComponent{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.rightComponent{
+    background: #051E34;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.logoLogin{
+    color: #fff;
+    font-size: 1.3rem;
+}
+
+.headNav{
+    color: #bebebe;
+    font-size: 1.15rem;
+}
+
+.formHead{
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.textInput{
+    color: #E66E00;
+    font-size: 1rem;
+}
+
+input{
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    width: 300px;
+    border: 2px solid #636363;
+    background-color: transparent;
+    font-size: 1.3rem;
+    transition: .5s ease;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+input:focus{
+    outline: none;
+    border: 2px solid #E66E00;
+    color: #E66E00;
+}
+
+.btnAvtive{
+    margin-top: 10px;
+    border:2px solid #E66E00;
+    background-color: transparent;
+    color: #E66E00;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 1.2rem;
+    border-radius: 20px;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.btnAvtive:hover {
+    background-color: #E66E00;
+    color: #fff;
+}
+
+.textLink{
+    margin-top: 20px;
+    color: rgb(182, 182, 182);
+}
+
+.textLink a{
+    color: #E66E00;
+}
+
+.textLink a:hover{
+    text-decoration: underline;
+}
+
+@media (max-width:1100px) {
+    .container{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width:870px) {
+    .container{
+        grid-template-columns: 1fr 2fr;
+    }
+}
+
+@media (max-width:700px) {
+    html {
+        font-size: 14px
+    }
+
+    .container{
+        grid-template-columns: 1fr;
+    }
+
+    .formLogin{
+        margin-top: -20px;
+    }
+
+    .formHead{
+        text-align: center;
+    }
+}
+
+@media (max-width:400px) {
+    .container{
+        height: fit-content;
+    }
+
+    .rightComponent{
+        align-items: flex-start;
+        height: calc(100vh - 100px);
+    }
+
+    .formLogin{
+        margin-top: 60px;
+    }
+
+    .leftComponent{
+        height: 100px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
 }
