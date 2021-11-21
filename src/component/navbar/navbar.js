@@ -20,12 +20,12 @@ export default function Navbar() {
         auth.onAuthStateChanged(user => {
             if(!user){
                 navigate(`/login`);
+            } else {
+                firestore.collection('users').doc(user.uid)
+                .onSnapshot( doc => {
+                    setUsername(doc.data().username.split(' ')[0] ? doc.data().username.split(' ')[0] : doc.data().username)
+                })
             }
-
-            firestore.collection('users').doc(user.uid)
-            .onSnapshot( doc => {
-                setUsername(doc.data().username.split(' ')[0] ? doc.data().username.split(' ')[0] : doc.data().username)
-            })
         })
     }, [])
 
