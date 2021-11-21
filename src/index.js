@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './global.css';
+import Index from './router/index';
 import reportWebVitals from './reportWebVitals';
 import {
   BrowserRouter,
@@ -12,7 +12,7 @@ import {
 ReactDOM.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/g03-react/" element={<App />}>
+      <Route path="/g03-react/" element={<Index />}>
         {/* <Route index element={<Home />} />
         <Route path="teams" element={<Teams />}>
           <Route path=":teamId" element={<Team />} />
