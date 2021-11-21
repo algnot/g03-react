@@ -1,0 +1,79 @@
+.container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--alert-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.aleartBox{
+    background: rgb(37, 37, 37);
+    max-width: 500px;
+    border-radius: 20px;
+    padding: 30px;
+    color: #fff;
+}
+
+.topAlert{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ffffff50;
+}
+
+.topLogo{
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.closeBtn{
+    font-size: 1.4rem;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .25s;
+}
+
+.closeBtn:hover{
+    background-color: #ffffff45;
+}
+
+.message{
+    margin: 30px 0;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+
+.btn{
+    width: 400px;
+    font-size: 1.3rem;
+    text-align: center;
+    background: rgb(32, 32, 32);
+    padding: 8px 0px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn:hover{
+    background: rgb(27, 27, 27);
+}
+
+@media (max-width:650px){
+    .aleartBox{
+        margin: 0 10px;
+    }
+
+    .btn{
+        width: calc(100vw - 80px);
+    }
+}

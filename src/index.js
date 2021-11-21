@@ -5,6 +5,7 @@ import Index from './router/index/index';
 import reportWebVitals from './reportWebVitals';
 import Register from './router/register/register';
 import Login from './router/login/login';
+import Profile from './router/profile/Profile';
 
 import {
   BrowserRouter,
@@ -18,10 +19,10 @@ ReactDOM.render(
         <Route path="/" index element={<Index />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById("root")
 );
-
 
 reportWebVitals();

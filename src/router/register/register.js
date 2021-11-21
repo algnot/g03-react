@@ -3,6 +3,7 @@ import style from './register.module.css'
 import { Link } from "react-router-dom";
 import { auth , firestore } from './../../firebase/firebase'
 import { useNavigate } from "react-router-dom";
+import Aleart from '../../component/aleart/aleart';
 
 export default function Register() {
     let navigate = useNavigate();
@@ -10,6 +11,9 @@ export default function Register() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+
+    const [displayAlert, setDisplayAlert] = useState(false)
+    const [textAlert, setTextAlert] = useState('')
 
     useEffect(() => {
         auth.onAuthStateChanged(user => {
@@ -20,8 +24,33 @@ export default function Register() {
     }, [])
 
     const Register = () => {
+        if(!email) {
+            setDisplayAlert(true);
+            setTextAlert("Please enter your email!");
+            return;
+        }
+
+        if(!username) {
+            setDisplayAlert(true);
+            setTextAlert("Please enter your username!");
+            return;
+        }
+
+        if(!password) {
+            setDisplayAlert(true);
+            setTextAlert("Please enter your password!");
+            return;
+        }
+
+        if(password.length < 8) {
+            setDisplayAlert(true);
+            setTextAlert("Password must contain at least 8 characters!");
+            return;
+        }
+
         if(password != confirmPassword) {
-            // เด้ง ๆ
+            setDisplayAlert(true);
+            setTextAlert("Please enter your password!");
             return;
         }
 
@@ -42,11 +71,21 @@ export default function Register() {
             })
         })
         .catch( error => {
-            console.log(error);
+            if(error.code == "auth/email-already-in-use"){
+                setDisplayAlert(true);
+                setTextAlert("Email already used");
+            }
         })
     }
 
     return (
+        <>
+        {
+            displayAlert && 
+            <Aleart Topic="Alert"
+                    Message={textAlert}
+                    setDisplayAlert={setDisplayAlert}/>
+        }
         <div className={style.container}>
             <div className={style.leftComponent}
                  style={{backgroundImage : `url("https://images.unsplash.com/photo-1637434659088-cec7b7ea8646?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80")`}}>
@@ -76,5 +115,6 @@ export default function Register() {
                 </div>
             </div>
         </div>
+        </>
     )
 }

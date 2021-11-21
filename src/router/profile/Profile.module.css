@@ -1,0 +1,21 @@
+.container{
+    height:100vh;
+    display: flex;
+}
+
+
+.imgcover{
+    height: 250px;
+}
+
+.imgprofile{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+}
+
+.profilename{
+    font-size: 1.5rem;
+}
