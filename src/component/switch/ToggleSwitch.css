@@ -17,9 +17,9 @@
       -moz-transform: scale(0.3);
       -o-transform: scale(0.3);
       transform: scale(0.3);
-      -webkit-transform-origin:left top;
+      /* -webkit-transform-origin:left top;
       -webkit-transition:0.5s all;
-      -moz-transition:0.5s all;
+      -moz-transition:0.5s all; */
       width: fit-content;
       height: 35px;
       /* height: fit-content; */
