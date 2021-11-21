@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-     benz na rak
+     benz na rak is true
     </div>
   );
 }
