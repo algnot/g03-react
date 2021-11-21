@@ -4,15 +4,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      
-      kkkkkkkkkkk1234546
-      kkkk
-      vsnsnvrnvlewnrvlnelrbnverb
-      erberbvBerb
-      erberbebeber
-
-      agagwgwa
-
+     you
     </div>
   );
 }
