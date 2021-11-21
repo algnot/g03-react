@@ -24,7 +24,7 @@ export default function Navbar() {
 
             firestore.collection('users').doc(user.uid)
             .onSnapshot( doc => {
-                setUsername(doc.data().username.split(' ')[0])
+                setUsername(doc.data().username.split(' ')[0] ? doc.data().username.split(' ')[0] : doc.data().username)
             })
         })
     }, [])

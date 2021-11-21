@@ -24,15 +24,15 @@ export default function Register() {
     }, [])
 
     const Register = () => {
-        if(!email) {
-            setDisplayAlert(true);
-            setTextAlert("Please enter your email!");
-            return;
-        }
-
         if(!username) {
             setDisplayAlert(true);
             setTextAlert("Please enter your username!");
+            return;
+        }
+
+        if(!email) {
+            setDisplayAlert(true);
+            setTextAlert("Please enter your email!");
             return;
         }
 
@@ -42,15 +42,15 @@ export default function Register() {
             return;
         }
 
-        if(password.length < 8) {
-            setDisplayAlert(true);
-            setTextAlert("Password must contain at least 8 characters!");
-            return;
-        }
-
         if(password != confirmPassword) {
             setDisplayAlert(true);
             setTextAlert("Please enter your password!");
+            return;
+        }
+
+        if(password.length < 8) {
+            setDisplayAlert(true);
+            setTextAlert("Password must contain at least 8 characters!");
             return;
         }
 
