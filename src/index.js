@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './global.css';
-import Index from './router/index';
+import Index from './router/index/index';
 import reportWebVitals from './reportWebVitals';
+import Register from './router/register/register';
 import {
   BrowserRouter,
   Routes,
@@ -12,14 +13,8 @@ import {
 ReactDOM.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/g03-react/" element={<Index />}>
-        {/* <Route index element={<Home />} />
-        <Route path="teams" element={<Teams />}>
-          <Route path=":teamId" element={<Team />} />
-          <Route path="new" element={<NewTeamForm />} />
-          <Route index element={<LeagueStandings />} />
-        </Route> */}
-      </Route>
+        <Route path="/g03-react/" index element={<Index />} />
+        <Route path="/g03-react/register" element={<Register />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById("root")
