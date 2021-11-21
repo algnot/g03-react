@@ -9,7 +9,7 @@ export default function Index() {
     useEffect(() => {
         auth.onAuthStateChanged( user => {
             if(!user){
-                navigate(`/register`);
+                navigate(`/login`);
             }
         })
     }, [])
