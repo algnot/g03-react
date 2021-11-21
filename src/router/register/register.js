@@ -42,7 +42,7 @@ export default function Register() {
                            type="password"
                            onChange={(e) => setConfirmPassword(e.target.value)} />
                     <div className={style.btnAvtive}>Register</div>
-                    <div className={style.textLink}>Have you G03-Project? <Link to="/g03-react/login"> Login now.</Link></div>
+                    <div className={style.textLink}>Have you G03-Project? <Link to="/login"> Login now.</Link></div>
                 </div>
             </div>
         </div>

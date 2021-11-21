@@ -15,9 +15,9 @@ import {
 ReactDOM.render(
   <BrowserRouter>
     <Routes>
-        <Route path="/g03-react/" index element={<Index />} />
-        <Route path="/g03-react/login" element={<Login />} />
-        <Route path="/g03-react/register" element={<Register />} />
+        <Route path="/" index element={<Index />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById("root")
