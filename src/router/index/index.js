@@ -4,6 +4,7 @@ import Navbar from '../../component/navbar/navbar'
 import Post from '../../component/post/post'
 import Tophome from '../../component/Tophome/tophome'
 import Search from '../../component/search/search'
+import CreatePost from '../../component/createpost/createpost'
 
 export default function Index() {
     return (
@@ -11,12 +12,13 @@ export default function Index() {
         <Navbar />
         <div className="content">
           <div>
-            <Tophome/>
-            <Post/>
-            <Post/>
-            <Post/> 
-          </div> 
-          <Search/>
+            <Tophome />
+            <Post />
+            <Post />
+            <CreatePost />
+            <Post />
+          </div>
+          <Search />
         </div>
       </div>
     );

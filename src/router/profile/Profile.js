@@ -7,7 +7,7 @@ import { auth, firestore } from '../../firebase/firebase';
 import Image from '../../component/showImage/Image';
 import EditProfile from '../../component/editProfile/editProfile';
 import { useNavigate } from "react-router-dom"
-
+import Search from '../../component/search/search';
 import Post from '../../component/post/post';
 
 export default function Profile(){
@@ -21,10 +21,12 @@ export default function Profile(){
     coverPhotoURL : '',
     created : '',
     role : '',
-    follower : [],
-    following : [],
+    follower : 0,
+    following : 0,
     title : ''
   })
+  const [follower, setFollower] = useState(0)
+  const [following, setFollowing] = useState(0)
 
   const [previewImg, setPreviewImg] = useState(false)
   const [editProfile, seteditProfile] = useState(false)
@@ -42,6 +44,14 @@ export default function Profile(){
           if(doc.data()){
             setUserInfo(doc.data())
           }
+        })
+        firestore.collection('users').doc(user.uid)
+        .collection('follower').onSnapshot(docs => {
+          setFollower(docs.size)
+        })
+        firestore.collection('users').doc(user.uid)
+        .collection('following').onSnapshot(docs => {
+          setFollowing(docs.size)
         })
       }
     })
@@ -82,14 +92,16 @@ export default function Profile(){
             </div>
             <div className={style.profileInformation}>
               <div className={style.username}>{userInfo.username}</div>
-              <div className={style.email}>@{userInfo.email}</div>
+              <div className={style.email}>{userInfo.email}</div>
               <div className={style.title}>{userInfo.title}</div>
               <div className={style.follower}>
-                <div>
-                {userInfo.follower.length} <span className={style.boldText}>follower</span>
+                <div className={style.numberFollower} 
+                onClick={() => navigate(`/follower/${userInfo.uid}`)}>
+                {follower} <span className={style.boldText}>follower</span>
                 </div>
-                <div>
-                {userInfo.following.length} <span className={style.boldText}>following</span>
+                <div className={style.numberFollower} 
+                onClick={() => navigate(`/following/${userInfo.uid}`)}>
+                {following} <span className={style.boldText}>following</span>
                 </div>
               </div>
             </div>
@@ -99,9 +111,9 @@ export default function Profile(){
               <div className={style.navProfileLink}>Media</div>
               <div className={style.navProfileLink}>Likes</div>
             </div>
-
             <Post />
           </div>
+          <Search/>
         </div>
       </div>
     </>

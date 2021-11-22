@@ -11,7 +11,7 @@ body {
 * {
   margin: 0;
   padding: 0;
-  transition: .5s ease;
+  transition: .2s ease;
 }
 
 /* width */
@@ -41,7 +41,8 @@ a{
 
 .theme-dark {
   --light-text: #F9F8F8;
-  --light-bg: #082032;
+  --light-bg: hsl(206, 72%, 11%);
+  --back-bg: #051a2b;
   --link-hover: rgb(56, 71, 80);  
   --border : #776666;
   --alert-bg : #F9F8F835;
@@ -54,6 +55,7 @@ a{
 .theme-light {
   --light-text: #2F4550;
   --light-bg: #fff;  
+  --back-bg: rgb(247, 247, 247);
   --link-hover: #d2e8f5; 
   --border : #776666;
   --alert-bg : #051E3490;
