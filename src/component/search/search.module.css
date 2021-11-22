@@ -1,0 +1,13 @@
+.container{
+    display: flex;
+    justify-content: center;
+}
+.searchInput{
+    width: 70%;
+    height: 30px;
+    border-radius: 30px;
+    border: 1px solid var(--border);
+}
+.container input:focus{
+    outline: none;
+}
