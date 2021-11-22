@@ -34,17 +34,28 @@ export default function Post() {
             efficitur pretium. Quisque sit amet tempor velit. Integer at erat
             metus. Mauris et ultrices libero. Nam ut consequat diam.
           </div>
+          <div className={style.imgpost}>
+              <img src="" />
+          </div>
         </div>
         <div className={style.bottompost}>
           <div className={style.navPostLink}>
-            <FontAwesomeIcon icon={faComment} className={style.iconcomment} />
-            <div className={style.amount}>10</div>
+            <div className={style.navconc}>
+              <FontAwesomeIcon icon={faComment} className={style.iconcomment} />
+              <div className={style.amountc}>10</div>
+            </div>  
           </div>
           <div className={style.navPostLink}>
-            <FontAwesomeIcon icon={faRetweet} className={style.iconretweet} />
+              <div className={style.navconr}>
+              <FontAwesomeIcon icon={faRetweet} className={style.iconretweet} />
+              <div className={style.amountr}>10</div>
+            </div>
           </div>
           <div className={style.navPostLink}>
-            <FontAwesomeIcon icon={faHeart} className={style.iconheart} />
+              <div className={style.navconh}>
+              <FontAwesomeIcon icon={faHeart} className={style.iconheart} />
+              <div className={style.amounth}>10</div>
+            </div>
           </div>
         </div>
       </div>

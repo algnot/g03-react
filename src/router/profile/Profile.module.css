@@ -11,16 +11,19 @@
     cursor: pointer;
 }
 
-.profileContainer{
-    border-right: 1px solid #776666;
-}
-
 .topNav{
+    position: fixed;
     display: flex;
+    z-index: 99;
+    background-color: var(--light-bg);
     gap: 20px;
     padding: 15px 20px;
     align-items: center;
-    border-bottom: 1px solid #776666;
+    width: calc(100vw - 405px - ((100vw - 360px)/5)*2 );
+    border-left: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    transition: 0;
 }
 
 .coverImg{
@@ -34,6 +37,8 @@
     align-items: center;
     cursor: pointer;
     z-index: 4;
+    border-right: 1px solid var(--border);
+    border-left: 1px solid var(--border);
 }
 
 .coverImg svg {
@@ -56,6 +61,7 @@
 
 .imgContainer{
     display: flex;
+    border-right: 1px solid var(--border);
 }
 
 .btnEdit{
@@ -78,8 +84,9 @@
 }
 
 .profileInformation{
-    margin-top: 16px;
+    padding-top: 16px;
     margin-left: 30px;
+    border-right: 1px solid var(--border);
 }
 
 .username{
@@ -109,6 +116,7 @@
     display: flex;
     justify-content: space-around;
     border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
 }
 
 .navProfileLink{
@@ -131,7 +139,17 @@
     font-weight: bold;
 }
 
+@media (max-width:1350px) {
+    .topNav{
+        width: calc(100vw - 360px);
+    }
+}
+
 @media (max-width:950px) {
+    .topNav{
+        width: calc(100vw - 280px);
+    }
+
     .coverImg{
         height: 150px;
     }
@@ -160,5 +178,11 @@
 
     .btnEdit{
         margin-top: 15px;
+    }
+}
+
+@media (max-width:750px) {
+    .topNav{
+        width: calc(100vw);
     }
 }

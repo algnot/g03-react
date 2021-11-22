@@ -6,8 +6,12 @@ import { faArrowLeft  } from '@fortawesome/free-solid-svg-icons'
 import { auth, firestore } from '../../firebase/firebase';
 import Image from '../../component/showImage/Image';
 import EditProfile from '../../component/editProfile/editProfile';
+import { useNavigate } from "react-router-dom"
+
+import Post from '../../component/post/post';
 
 export default function Profile(){
+  let navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useState({
     uid : '',
@@ -56,11 +60,13 @@ export default function Profile(){
         <div className="content">
           <div className={style.profileContainer}>
             <div className={style.topNav}>
-              <FontAwesomeIcon icon={faArrowLeft} />
+              <FontAwesomeIcon icon={faArrowLeft} 
+                               onClick={() => navigate(`/`)}/>
               <div className={style.textTopNav} >
                 {userInfo.username}
               </div>
             </div>
+            <div style={{marginTop:59}}></div>
             <div className={style.coverImg} 
                   style={{backgroundImage: `url('${userInfo.coverPhotoURL}')`}}
                   onClick={() => showImg(userInfo.coverPhotoURL)}>
@@ -93,6 +99,8 @@ export default function Profile(){
               <div className={style.navProfileLink}>Media</div>
               <div className={style.navProfileLink}>Likes</div>
             </div>
+
+            <Post />
           </div>
         </div>
       </div>

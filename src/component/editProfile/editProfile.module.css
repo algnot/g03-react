@@ -50,7 +50,7 @@
     align-items: center;
     cursor: pointer;
 }
-
+ 
 .previewCover svg{
     font-size: 2rem;
     color: var(--light-text);
@@ -120,4 +120,16 @@ input:focus{
 .loading{
     height: 3px;
     background-color: var(--active-btn);
+}
+
+@media (max-width:850px) {
+    .container{
+        align-items: flex-start;
+    }
+
+    .editBox{
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+    }
 }
