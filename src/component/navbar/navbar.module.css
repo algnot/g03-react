@@ -107,4 +107,8 @@
     .switch{
         display: none;
     }
+
+    .container{
+        border-top: 1px solid var(--border);
+    } 
 }

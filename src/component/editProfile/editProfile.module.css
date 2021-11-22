@@ -1,0 +1,28 @@
+.container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--preview-img-bg);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--light-text);
+}
+
+.editBox{
+    width: 750px;
+    background: var(--light-bg);
+    /* padding: 30px; */
+    border-radius: 30px;
+}
+
+.navEditBox{
+    padding: 30px 20px;
+    display: flex;
+    font-size: 1.5rem;
+    /* justify-content: center; */
+    align-items: center;
+}

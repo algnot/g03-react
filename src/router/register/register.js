@@ -64,8 +64,12 @@ export default function Register() {
                         username : username,
                         email : result.user.email,
                         photoURL : '',
+                        coverPhotoURL : '',
                         created : new Date().valueOf(),
-                        role : 'user'
+                        role : 'user',
+                        follower : [],
+                        following : [],
+                        title : ''
                     })
                 }
             })

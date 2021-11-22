@@ -24,6 +24,10 @@ a{
   --link-hover: rgb(56, 71, 80);  
   --border : #776666;
   --alert-bg : #F9F8F835;
+  --bold : #858585;
+  --active-btn : #FF7A00;
+  --hover-btn : #64646421;
+  --preview-img-bg : #afafaf35;
 }
 
 .theme-light {
@@ -32,8 +36,38 @@ a{
   --link-hover: #d2e8f5; 
   --border : #776666;
   --alert-bg : #051E3490;
+  --bold : #858585;
+  --active-btn : #FF7A00;
+  --hover-btn : #64646421;
+  --preview-img-bg : #2A202065;
 }
 
 .content{
   margin-left: 360px;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+}
+
+@media (max-width:1350px) {
+  .content{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width:950px) {
+  .content{
+    margin-left: 280px;
+  }
+}
+
+@media (max-width:800px) {
+  .content{
+    margin-left: 260px;
+  }
+}
+
+@media (max-width:750px) {
+  .content{
+    margin-left: 0;
+  }
 }

@@ -1,21 +1,164 @@
 .container{
-    height:100vh;
+    color: var(--light-text);
+}
+
+.textTopNav{
+    font-size: 1.3rem;
+}
+
+.topNav svg {
+    font-size: 1.4rem;    
+    cursor: pointer;
+}
+
+.profileContainer{
+    border-right: 1px solid #776666;
+}
+
+.topNav{
+    display: flex;
+    gap: 20px;
+    padding: 15px 20px;
+    align-items: center;
+    border-bottom: 1px solid #776666;
+}
+
+.coverImg{
+    height: 200px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(80%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 4;
+}
+
+.coverImg svg {
+    font-size: 1.4rem;
+}
+
+.profileImg{
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 100%;
+    margin-top: -75px;
+    cursor: pointer;
+    z-index: 5;
+    border: 4px solid var(--light-bg);
+    margin-left: 30px;
+}
+
+.imgContainer{
     display: flex;
 }
 
-
-.imgcover{
-    height: 250px;
+.btnEdit{
+    width: fit-content;
+    height: fit-content;
+    border: 2px solid var(--light-text);
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: 30px;
+    padding: 6px 10px;
+    border-radius: 20px;
+    margin-top: 30px;
+    cursor: pointer;
 }
 
-.imgprofile{
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid white;
+.btnEdit:hover{
+    background-color: var(--light-text);
+    color: var(--light-bg);
 }
 
-.profilename{
-    font-size: 1.5rem;
+.profileInformation{
+    margin-top: 16px;
+    margin-left: 30px;
+}
+
+.username{
+    font-size: 1.3rem;
+}
+
+.boldText{
+    color: var(--bold);
+}
+
+.email{
+    color: var(--bold);
+    font-size: 1rem;
+}
+
+.title{
+    margin-top: 20px;
+}
+
+.follower{
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.navProfile{
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid var(--border);
+}
+
+.navProfileLink{
+    width: fit-content;
+    padding: 20px 0;
+    cursor: pointer;
+    color: var(--bold);
+    font-weight: bold;
+}
+
+.navProfileLink:hover{
+    background-color: var(--hover-btn);
+}
+
+.navProfileLinkActive{
+    width: fit-content;
+    padding: 20px 0;
+    cursor: pointer;
+    border-bottom: 3px solid var(--active-btn);
+    font-weight: bold;
+}
+
+@media (max-width:950px) {
+    .coverImg{
+        height: 150px;
+    }
+
+    .profileImg{
+        width: 100px;
+        height: 100px;
+        margin-top: -50px;
+    }
+
+    html {
+        font-size: 16px;
+    }
+
+    .profileInformation{
+        margin-left: 10px;
+    }
+
+    .profileImg{
+        margin-left: 10px;
+    }
+
+    .btnEdit{
+        margin-right: 10px;
+    }
+
+    .btnEdit{
+        margin-top: 15px;
+    }
 }

@@ -24,8 +24,12 @@ export default function Login() {
                         username : result.user.displayName,
                         email : result.user.email,
                         photoURL : result.user.photoURL,
+                        coverPhotoURL : '',
                         created : new Date().valueOf(),
-                        role : 'user'
+                        role : 'user',
+                        follower : [],
+                        following : [],
+                        title : ''
                     })
                 }
             })

@@ -23,7 +23,8 @@ export default function Navbar() {
             } else {
                 firestore.collection('users').doc(user.uid)
                 .onSnapshot( doc => {
-                    setUsername(doc.data().username.split(' ')[0] ? doc.data().username.split(' ')[0] : doc.data().username)
+                    if(doc.data())
+                        setUsername(doc.data().username.split(' ')[0] ? doc.data().username.split(' ')[0] : doc.data().username)
                 })
             }
         })

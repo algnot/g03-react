@@ -1,0 +1,22 @@
+.container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--preview-img-bg);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container img{
+    height: 70vh;
+}
+
+@media (max-width:800px) {
+    .container img{
+        height: 50vh;
+    }
+}
