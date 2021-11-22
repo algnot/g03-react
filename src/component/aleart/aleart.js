@@ -3,7 +3,7 @@ import style from './../aleart/aleart.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
-export default function ConfirmAleart({Topic , Message , Btn , setDisplayAlert}) {
+export default function Aleart({Topic , Message , setDisplayAlert}) {
 
     return (
         <div className={style.container}>

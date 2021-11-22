@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { auth , firestore } from './../../firebase/firebase'
 import { useNavigate } from "react-router-dom";
 import Aleart from '../../component/aleart/aleart';
+import { keepTheme } from "./../../theme/theme"
 
 export default function Register() {
     let navigate = useNavigate();
@@ -21,6 +22,7 @@ export default function Register() {
                 navigate(`/`);
             }
         })    
+        keepTheme();
     }, [])
 
     const Register = () => {
@@ -63,8 +65,8 @@ export default function Register() {
                         uid : result.user.uid,
                         username : username,
                         email : result.user.email,
-                        photoURL : '',
-                        coverPhotoURL : '',
+                        photoURL : 'https://firebasestorage.googleapis.com/v0/b/g03-project.appspot.com/o/u%2Fbasic_img%2Fmain%2Fimages.jpg?alt=media&token=d3f747ad-71ab-4014-b67d-7c235fc980d4',
+                        coverPhotoURL : 'https://firebasestorage.googleapis.com/v0/b/g03-project.appspot.com/o/u%2Fbasic_img%2Fcover%2Fpile-of-abstract-facebook-cover.png?alt=media&token=aa0a7350-f2b2-400d-a027-477cb2c09812',
                         created : new Date().valueOf(),
                         role : 'user',
                         follower : [],

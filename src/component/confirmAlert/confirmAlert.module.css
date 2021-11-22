@@ -2,19 +2,20 @@
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background-color: var(--alert-bg);
+    background-color: var(--preview-img-bg);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 9999;
+    color: var(--light-text);
 }
 
 .aleartBox{
-    background: rgb(37, 37, 37);
+    background: var(--light-bg);
     max-width: 500px;
     border-radius: 20px;
     padding: 30px;
-    color: #fff;
+    color: var(--light-text);
 }
 
 .topAlert{
@@ -57,7 +58,8 @@
     width: 400px;
     font-size: 1.3rem;
     text-align: center;
-    background: rgb(32, 32, 32);
+    background-color: var(--light-text);
+    color: var(--light-bg);
     padding: 8px 0px;
     border-radius: 5px;
     cursor: pointer;
@@ -65,7 +67,7 @@
 }
 
 .btn:hover{
-    background: rgb(27, 27, 27);
+    opacity: 0.8;
 }
 
 @media (max-width:650px){

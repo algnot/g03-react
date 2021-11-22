@@ -2,15 +2,15 @@
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background-color: #051E3490;
+    background-color: var(--preview-img-bg);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .aleartBox{
-    background: rgb(37, 37, 37);
-    opacity: 0.9;
+    background: var(--light-bg);
+    /* opacity: 0.9; */
     max-width: 500px;
     border-radius: 20px;
     padding: 30px;

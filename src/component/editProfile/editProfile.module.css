@@ -15,14 +15,109 @@
 .editBox{
     width: 750px;
     background: var(--light-bg);
-    /* padding: 30px; */
     border-radius: 30px;
 }
 
+.navEditBox svg {
+    cursor: pointer;
+}
+
+.navEditBoxLeft{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 .navEditBox{
-    padding: 30px 20px;
+    padding: 20px 25px;
     display: flex;
     font-size: 1.5rem;
-    /* justify-content: center; */
+    justify-content: space-between;
     align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.previewCover{
+    width: 100%;
+    height: 150px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(80%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.previewCover svg{
+    font-size: 2rem;
+    color: var(--light-text);
+}
+
+.previewImg{
+    position: relative;
+    margin-top: -75px;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-left: 20px;
+    border: 3px solid var(--light-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    filter: brightness(80%);
+}
+
+.textInput{
+    color: #E66E00;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+input{
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    width: 300px;
+    border: 2px solid #636363;
+    background-color: transparent;
+    font-size: 1.3rem;
+    transition: .5s ease;
+    color: var(--light-text);
+    margin-bottom: 20px;
+    width: calc(100% - 16px);
+}
+
+input:focus{
+    outline: none;
+    border: 2px solid var(--light-text);
+    color: var(--light-text);
+}
+
+.btnSave{
+    background-color: var(--light-text);
+    color: var(--light-bg);
+}
+
+.formEdit{
+    margin:30px;
+}
+
+.btnSave{
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.loading{
+    height: 3px;
+    background-color: var(--active-btn);
 }

@@ -5,6 +5,7 @@ import { auth , googleProvider , firestore } from './../../firebase/firebase'
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Aleart from '../../component/aleart/aleart';
+import { keepTheme } from "./../../theme/theme"
 
 export default function Login() {
     let navigate = useNavigate();
@@ -14,6 +15,7 @@ export default function Login() {
     const [textAlert, setTextAlert] = useState('')
 
     const googleLogin = async () => {
+        keepTheme();
         await auth.signInWithPopup(googleProvider)
         .then( result => {
             const userRef = firestore.collection('users').doc(result.user.uid)
@@ -23,8 +25,8 @@ export default function Login() {
                         uid : result.user.uid,
                         username : result.user.displayName,
                         email : result.user.email,
-                        photoURL : result.user.photoURL,
-                        coverPhotoURL : '',
+                        photoURL : result.user.photoURL ? result.user.photoURL : 'https://firebasestorage.googleapis.com/v0/b/g03-project.appspot.com/o/u%2Fbasic_img%2Fmain%2Fimages.jpg?alt=media&token=d3f747ad-71ab-4014-b67d-7c235fc980d4',
+                        coverPhotoURL : 'https://firebasestorage.googleapis.com/v0/b/g03-project.appspot.com/o/u%2Fbasic_img%2Fcover%2Fpile-of-abstract-facebook-cover.png?alt=media&token=aa0a7350-f2b2-400d-a027-477cb2c09812',
                         created : new Date().valueOf(),
                         role : 'user',
                         follower : [],

@@ -1,13 +1,18 @@
-import React , {useEffect} from 'react'
+import React from 'react'
 import style from './index.module.css'
-import { auth } from '../../firebase/firebase'
 import Navbar from '../../component/navbar/navbar'
+import Post from '../../component/post/post'
 
 export default function Index() {
     return (
       <div className={style.container}>
         <Navbar />
         <div className="content">
+          <div>
+            <Post/>
+            <Post/>
+            <Post/>
+          </div>
             
         </div>
       </div>
