@@ -9,6 +9,7 @@ import Profile from './router/profile/Profile';
 import User from './router/u/user'
 import Following from './router/following/following';
 import Follower from './router/follower/follower';
+import Post from './router/post/post';
 
 import {
   BrowserRouter,
@@ -24,6 +25,7 @@ ReactDOM.render(
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/u/:uid" element={<User />} />
+        <Route path="/post/:postId" element={<Post />} />
         <Route path="/following/:uid" element={<Following />} />
         <Route path="/follower/:uid" element={<Follower />} />
     </Routes>

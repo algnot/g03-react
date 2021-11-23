@@ -1,0 +1,135 @@
+.textTopNav{
+    font-size: 1.3rem;
+}
+
+.topNav svg {
+    font-size: 1.4rem;    
+    cursor: pointer;
+}
+
+.topNav{
+    position: fixed;
+    display: flex;
+    z-index: 99;
+    background-color: var(--light-bg);
+    color: var(--light-text);
+    gap: 20px;
+    padding: 15px 20px;
+    align-items: center;
+    width: calc(100vw - 405px - ((100vw - 360px)/5)*2 );
+    border-left: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    transition: 0;
+}
+
+.postContainer{
+    border-right: 1px solid var(--bold);
+    border-bottom: 1px solid var(--bold);
+    padding: 20px 30px;
+    gap: 20px;
+    cursor: pointer;
+}
+
+.subPostContainer{
+    border-right: 1px solid var(--bold);
+    /* border-bottom: 1px solid var(--bold); */
+    padding: 20px 30px;
+    gap: 20px;
+    cursor: pointer;
+}
+
+.subPostContainer:hover{
+    background: var(--back-bg);
+}
+
+.userTitle2{
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--light-text);
+}
+
+.useInfo2{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.useInfo{
+    display: flex;
+    gap: 20px;
+}
+
+.userProfile{
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.subPostContainer .userProfile{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.userName{
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--light-text);
+}
+
+.time{
+    font-size: .8rem;
+    color: var(--bold);
+    font-weight: bold;
+}
+
+.postInfo{
+    margin-top: 14px;
+    margin-left: 65px;
+    font-size: 1.4rem;
+    color: var(--light-text);
+}
+
+.previewImg{
+    width: 250px;
+    height: 250px;
+    border-radius: 20px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-left: 65px;
+    margin-top: 10px;
+}
+
+@media (max-width:1350px) {
+    .topNav{
+        width: calc(100vw - 360px);
+    }
+}
+
+@media (max-width:950px) {
+    .topNav{
+        width: calc(100vw - 280px);
+    }
+}
+
+@media (max-width:750px) {
+    .topNav{
+        width: calc(100vw);
+    }
+
+    .postInfo{
+        margin-left: 0;
+    }
+
+    .previewImg{
+        margin-left: 0;
+    }
+}

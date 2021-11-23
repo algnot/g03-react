@@ -11,7 +11,8 @@ export default function Index() {
   const [post, setPost] = useState([])
 
   useEffect(() => {
-    firestore.collection('posts').orderBy('time','desc')
+    firestore.collection('posts')
+    .orderBy('time','desc')
     .onSnapshot(docs => {
       var temp = []
       docs.forEach(doc => {
@@ -32,7 +33,7 @@ export default function Index() {
             </div>
           </div>
           <div style={{marginTop:59}}></div>
-          <CreatePost />
+          <CreatePost subpost={0} />
           {
             post.map((item,index) => {
               return <Post key={index} item={item}/>

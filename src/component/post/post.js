@@ -5,7 +5,7 @@ import { faRetweet, faComment, faHeart } from "@fortawesome/free-solid-svg-icons
 import { auth, firestore } from '../../firebase/firebase';
 import Image from './../showImage/Image'
 import { useNavigate } from "react-router-dom"
-
+ 
 export default function Post({item}) {
   let navigate = useNavigate();
 
@@ -27,6 +27,8 @@ export default function Post({item}) {
   const [id , setId] = useState('')
   const [isLike, setIsLike] = useState(false)
   const [numberLike, setNumberLike] = useState(0)
+  const [isRetweet, setIsRetweet] = useState(false)
+  const [numberRetweet, setNumberRetweet] = useState(0)
 
   const like = () => {
     firestore.collection('posts').doc(id)
@@ -46,6 +48,34 @@ export default function Post({item}) {
       id : id,
       postId : item.uid
     })
+  }
+
+  const retweet = () => {
+    firestore.collection('posts').doc(id)
+    .collection('retweet').doc(uid)
+    .set({
+      date : new Date().valueOf(),
+      uid : uid,
+      id : id,
+      postId : item.uid
+    })
+
+    firestore.collection('users').doc(uid)
+    .collection('retweet').doc(id)
+    .set({
+      date : new Date().valueOf(),
+      uid : uid,
+      id : id,
+      postId : item.uid
+    })
+  }
+
+  const unRetweet = () => {
+    firestore.collection('posts').doc(id)
+    .collection('retweet').doc(uid).delete()
+
+    firestore.collection('users').doc(uid)
+    .collection('retweet').doc(id).delete()
   }
 
   const unLike = () => {
@@ -77,6 +107,18 @@ export default function Post({item}) {
           isLikeRef.onSnapshot(doc => {
             if(doc.exists) setIsLike(true)
             else setIsLike(false)
+          })
+
+          const isRetweetRef = firestore.collection('posts').doc(doc.id)
+                                 .collection('retweet').doc(user.uid)
+          const numberRetweetRef = firestore.collection('posts').doc(doc.id)
+                                 .collection('retweet')
+          numberRetweetRef.onSnapshot(docs => {
+            setNumberRetweet(docs.size)
+          })
+          isRetweetRef.onSnapshot(doc => {
+            if(doc.exists) setIsRetweet(true)
+            else setIsRetweet(false)
           })
         })
       })
@@ -116,11 +158,22 @@ export default function Post({item}) {
         )
       }
       <div className={style.icons}>
-        <div className={style.icon1}>
-          <FontAwesomeIcon icon={faRetweet} />
-          10
-        </div>
-        <div className={style.icon2}>
+
+        {
+          isRetweet ? (
+            <div className={style.icon1Active} onClick={unRetweet}>
+              <FontAwesomeIcon icon={faRetweet} />
+              {numberRetweet}
+            </div>   
+          ) : (
+            <div className={style.icon1} onClick={retweet}>
+              <FontAwesomeIcon icon={faRetweet} />
+              {numberRetweet}
+            </div>    
+          )
+        }
+        
+        <div className={style.icon2} onClick={() => navigate(`/post/${item.postId}`)}>
           <FontAwesomeIcon icon={faComment} />
           10
         </div>

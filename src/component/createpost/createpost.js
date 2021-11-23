@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImages , faTimes } from "@fortawesome/free-solid-svg-icons";
 import { auth, firestore ,storage } from '../../firebase/firebase';
 
-export default function CreatePost() {
+export default function CreatePost({subpost}) {
   const inputRefMain = useRef()
 
   const [textPost, setTextPost] = useState('')
@@ -44,7 +44,7 @@ export default function CreatePost() {
     setOnUpload(true)
     firestore.collection('posts').add({
       postId : Math.floor(Math.random() * 8999999999 + 1000000000),
-      subPostId : 0,
+      subPostId : subpost,
       uid : user.uid,
       text : textPost,
       img : urlImg ? urlImg : false,

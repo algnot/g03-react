@@ -6,7 +6,6 @@ import { faArrowLeft  } from '@fortawesome/free-solid-svg-icons'
 import Image from '../../component/showImage/Image';
 import { useNavigate } from "react-router-dom"
 import Search from '../../component/search/search';
-import Post from '../../component/post/post';
 import { useParams } from "react-router-dom";
 import { auth, firestore } from '../../firebase/firebase';
 

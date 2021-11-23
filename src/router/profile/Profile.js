@@ -8,7 +8,6 @@ import Image from '../../component/showImage/Image';
 import EditProfile from '../../component/editProfile/editProfile';
 import { useNavigate } from "react-router-dom"
 import Search from '../../component/search/search';
-import Post from '../../component/post/post';
 
 export default function Profile(){
   let navigate = useNavigate();
