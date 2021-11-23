@@ -1,34 +1,130 @@
-import react from 'react'
+import React , {useEffect,useState,useRef} from 'react'
 import style from "./createpost.module.css";
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faImages, faSmile } from "@fortawesome/free-solid-svg-icons";
+import { faImages , faTimes } from "@fortawesome/free-solid-svg-icons";
+import { auth, firestore ,storage } from '../../firebase/firebase';
 
 export default function CreatePost() {
-    return (
-      <div className={style.container}>
-        <div className={style.leftcpost}>
-          <div className={style.profileimg}>
-            <Link to="/profile">
-              <img
-                src="https://i.pinimg.com/originals/8e/de/53/8ede538fcf75a0a1bd812810edb50cb7.jpg"
-                className={style.imgp}
-              />
-            </Link>
-          </div>
-        </div>
-        <div className={style.rightcpost}>
-          <textarea className={style.text} rows="5" cols="80"></textarea>
-          <div className={style.add}>
-            <div className={style.addl}>
-              <FontAwesomeIcon icon={faImages} className={style.icon1} />
-              <FontAwesomeIcon icon={faSmile} className={style.icon2} />
-            </div>
-            <div className={style.btn}>
-              <button className={style.btnt}>Tweet</button>
-            </div>
-          </div>
-        </div>
+  const inputRefMain = useRef()
+
+  const [textPost, setTextPost] = useState('')
+  const [percentChange, setPercentChange] = useState(0)
+  const [urlImg, setUrlImg] = useState('')
+
+  const [onUpload, setOnUpload] = useState(false)
+
+  const [user, setUser] = useState({
+    uid : '',
+    username : '',
+    email : '',
+    photoURL : '',
+    coverPhotoURL : '',
+    created : '',
+    role : '',
+    follower : [],
+    following : [],
+    title : ''
+  })
+
+  useEffect(() => {
+    auth.onAuthStateChanged(user => {
+      if(user){
+        firestore.collection('users').doc(user.uid)
+        .onSnapshot(doc => {
+          setUser(doc.data())
+        })
+      }
+    })
+  }, [])
+
+  const onPost = () => {
+    if(!textPost){
+      return
+    }
+    setOnUpload(true)
+    firestore.collection('posts').add({
+      postId : Math.floor(Math.random() * 8999999999 + 1000000000),
+      subPostId : 0,
+      uid : user.uid,
+      text : textPost,
+      img : urlImg ? urlImg : false,
+      time : new Date().valueOf()
+    })
+    .then(() => {
+      setOnUpload(false)
+      removeImg()
+      setTextPost('')
+    })
+    .catch(() => {
+      setOnUpload(false)
+    })
+  }
+
+  const setImgPost = (image) => {
+    setPercentChange(10)
+    var random = Math.floor(Math.random()*9999999999);
+    const uploadTask = storage.ref(`/post/image/${random}`)
+    uploadTask.put(image).on('state_changed', 
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setPercentChange(progress - 10)
+        }, 
+        (error) => {}, 
+        () => {
+            storage.ref(`/post/image/${random}`).getDownloadURL()
+            .then((url) => {
+              setPercentChange(100)
+              setUrlImg(url)
+            })
+        }
+    )
+  }
+
+  const removeImg = () => {
+    setUrlImg('')
+    setPercentChange(0)
+  }
+
+  return (
+    <div className={style.container} style={{opacity:onUpload ? 0.5 : 1}}>
+      <div className={style.imgContainer}>
+        <div className={style.imgProfile}
+             style={{backgroundImage:`url(${user.photoURL})`}}></div>
       </div>
-    );
+      <div className={style.from}>
+        <textarea rows="2" placeholder="What happend?"
+                  value={textPost}
+                  onChange={(e) => setTextPost(e.target.value)}/>
+        <div className={style.progressBar} 
+             style={{width:`${percentChange}%`}}></div>
+        {
+          urlImg && (
+            <div className={style.previewImgContainer}>
+            <div className={style.previewImg}
+                 style={{backgroundImage: `url(${urlImg})`}}>
+              <div className={style.close}
+                   onClick={removeImg}>
+                <FontAwesomeIcon icon={faTimes} />
+              </div>
+            </div>
+            </div>
+          )
+        }
+        <div className={style.btnContainer}>
+            <div className={style.icons}>
+              <FontAwesomeIcon icon={faImages} 
+                               onClick={() => inputRefMain.current.click()}/>
+              {/* <FontAwesomeIcon icon={faSmile} /> */}
+            </div>
+            <div className={style.btn}
+                 onClick={onPost}>Tweet</div>
+        </div>
+        <input accept="image/png, image/jpeg , image/gif"
+               ref={inputRefMain} 
+               style={{ display: "none" }}
+               onChange={(e)=>{setImgPost(e.target.files[0])}}
+               type="file" />
+      </div>
+    </div>
+  );
 }

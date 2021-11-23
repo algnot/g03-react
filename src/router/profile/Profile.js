@@ -111,7 +111,7 @@ export default function Profile(){
               <div className={style.navProfileLink}>Media</div>
               <div className={style.navProfileLink}>Likes</div>
             </div>
-            <Post />
+
           </div>
           <Search/>
         </div>

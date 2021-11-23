@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom"
 import { firestore } from '../../firebase/firebase'
 import { useNavigate } from "react-router-dom"
 
-export default function Follower() {
+export default function Follower() { 
     let navigate = useNavigate();
     const { uid } = useParams()
     const [userInfo, setUserInfo] = useState({
