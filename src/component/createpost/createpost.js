@@ -92,7 +92,7 @@ export default function CreatePost({subpost}) {
              style={{backgroundImage:`url(${user.photoURL})`}}></div>
       </div>
       <div className={style.from}>
-        <textarea rows="2" placeholder="What happend?"
+        <textarea rows="2" placeholder={`What's on your mind, ${user.username}?`}  
                   value={textPost}
                   onChange={(e) => setTextPost(e.target.value)}/>
         <div className={style.progressBar} 
