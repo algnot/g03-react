@@ -38,7 +38,7 @@ export default function CreatePost({subpost}) {
   }, [])
 
   const onPost = () => {
-    if(!textPost){
+    if(!textPost && !urlImg){
       return
     }
     setOnUpload(true)
