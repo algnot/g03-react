@@ -44,7 +44,7 @@ export default function CreatePost({subpost}) {
     setOnUpload(true)
     firestore.collection('posts').add({
       postId : Math.floor(Math.random() * 8999999999 + 1000000000),
-      subPostId : subpost,
+      subPostId : parseInt(subpost),
       uid : user.uid,
       text : textPost,
       img : urlImg ? urlImg : false,
@@ -54,6 +54,7 @@ export default function CreatePost({subpost}) {
       setOnUpload(false)
       removeImg()
       setTextPost('')
+      // window.location.reload()
     })
     .catch(() => {
       setOnUpload(false)

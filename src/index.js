@@ -23,7 +23,7 @@ ReactDOM.render(
         <Route path="/" index element={<Index />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<Profile  />} />
         <Route path="/u/:uid" element={<User />} />
         <Route path="/post/:postId" element={<Post />} />
         <Route path="/following/:uid" element={<Following />} />

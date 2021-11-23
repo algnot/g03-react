@@ -8,11 +8,12 @@ import { useNavigate } from "react-router-dom"
 import Search from '../../component/search/search';
 import { useParams } from "react-router-dom";
 import { auth, firestore } from '../../firebase/firebase';
+import Post from '../../component/post/post';
 
 export default function User(){
   const { uid } = useParams();
   let navigate = useNavigate();
-
+ 
   const [userInfo, setUserInfo] = useState({
     uid : '',
     username : '',
@@ -32,6 +33,9 @@ export default function User(){
   const [follower, setFollower] = useState(0)
   const [following, setFollowing] = useState(0)
   const [isFollowing, setIsFollowing] = useState(0)
+
+  const [postShow, setPostShow] = useState([])
+  const [statusPage, setStatusPage] = useState(1)
 
   const follow = () => {
     setIsFollowing(true)
@@ -98,7 +102,96 @@ export default function User(){
       .collection('following').onSnapshot(docs => {
         setFollowing(docs.size)
       })
+      getPost()
   }, [])
+
+  const getPost = () => {
+    setStatusPage(1)
+    setPostShow([])
+    const tweetRef = firestore.collection('users').doc(uid)
+                              .collection('retweet')
+    tweetRef.get()
+    .then(docs => {
+      var tempPostId = []
+      docs.forEach(doc => {
+        tempPostId = [...tempPostId , doc.data().postId]
+      })
+      if(tempPostId.length > 0){
+        // splice(0, 10)
+        tempPostId = tempPostId.splice(0, 10)
+        // !!!!!!!! ########
+        const retweet = firestore.collection('posts').where('postId' , 'in' , tempPostId)
+        retweet.get()
+        .then( docs => {
+          var temp = []
+          docs.forEach(doc => {
+            temp = [...temp , doc.data()]
+          })
+          temp.sort((a,b) => b.time - a.time)
+          setPostShow(temp)
+        })
+      }
+    })
+  }
+
+  const getPostReply = () => {
+    setPostShow([])
+    setStatusPage(2)
+    const postRef = firestore.collection('posts')
+    .where('uid','==',uid)
+    postRef.get().then( docs => {
+      var temp = []
+      docs.forEach( doc => {
+        temp = [...temp, doc.data()]
+      })
+      temp.sort((a,b) => b.time - a.time)
+      setPostShow(temp)
+    })
+  }
+
+  const getMedia = () => {
+    setPostShow([])
+    setStatusPage(3)
+    const postRef = firestore.collection('posts')
+    .where('uid','==',uid)
+    .where('img','!=',false)
+    postRef.get().then( docs => {
+      var temp = []
+      docs.forEach( doc => {
+        temp = [...temp, doc.data()]
+      })
+      temp.sort((a,b) => b.time - a.time)
+      setPostShow(temp)
+    })
+  }
+
+  const getLike = () => {
+    setStatusPage(4)
+    setPostShow([])
+    const tweetRef = firestore.collection('users').doc(uid)
+                              .collection('like')
+    tweetRef.get()
+    .then(docs => {
+      var tempPostId = []
+      docs.forEach(doc => {
+        tempPostId = [...tempPostId , doc.data().postId]
+      })
+      if(tempPostId.length > 0){
+        tempPostId = tempPostId.splice(0, 10)
+        // !!!!!!!! ########
+        const retweet = firestore.collection('posts').where('postId' , 'in' , tempPostId)
+        retweet.get()
+        .then( docs => {
+          var temp = []
+          docs.forEach(doc => {
+            temp = [...temp , doc.data()]
+          })
+          temp.sort((a,b) => b.time - a.time)
+          setPostShow(temp)
+        })
+      }
+    })
+  }
 
   return (
     <>
@@ -162,11 +255,23 @@ export default function User(){
               </div>
             </div>
             <div className={style.navProfile}>
-              <div className={style.navProfileLinkActive}>Post</div>
-              <div className={style.navProfileLink}>Post & Replies</div>
-              <div className={style.navProfileLink}>Media</div>
-              <div className={style.navProfileLink}>Likes</div>
+              <div className={statusPage == 1 ? style.navProfileLinkActive : style.navProfileLink}
+                   onClick={getPost}>Tweets</div>
+              <div className={statusPage == 2 ? style.navProfileLinkActive : style.navProfileLink}
+                   onClick={getPostReply}>Tweets and reply</div>
+              <div className={statusPage == 3 ? style.navProfileLinkActive : style.navProfileLink}
+                   onClick={getMedia}>Media</div>
+              <div className={statusPage == 4 ? style.navProfileLinkActive : style.navProfileLink}
+                   onClick={getLike}>Likes</div>
             </div>
+
+            {
+              postShow.map((item,index) => {
+                return (
+                  <Post key={index} item={item}/>
+                )
+              })
+            }
 
           </div>
           <Search/>

@@ -19,23 +19,19 @@ body {
   transition: .2s ease;
 }
 
-/* width */
 ::-webkit-scrollbar {
   width: 6px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   background: transparent; 
 }
  
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: #555; 
   border-radius: 5px;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #888; 
 }

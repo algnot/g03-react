@@ -9,6 +9,7 @@ import { firestore } from '../../firebase/firebase'
 import { useParams } from "react-router-dom"
 import  CreatePost  from './../../component/createpost/createpost'
 import Image from './../../component/showImage/Image'
+import Post from './../../component/post/post'
 
 export default function MainPost() {
     let navigate = useNavigate()
@@ -58,6 +59,8 @@ export default function MainPost() {
         title : ''
     })
 
+    const [userComment, setUserComment] = useState([])
+
     useEffect(() => {
         const postRef = firestore.collection('posts').where('postId','==',parseInt(postId))
         postRef.onSnapshot(docs => {
@@ -81,11 +84,16 @@ export default function MainPost() {
                     }
                 })
 
-                const commentRef = firestore.collection('posts').where('subPostId' , '==' , subId)
+                const commentRef = firestore.collection('posts')
+                .where('subPostId' , '==' , parseInt(postId))
                 commentRef.onSnapshot(docs => {
+                    setUserComment([])
+                    var temp = []
                     docs.forEach(doc => {
-                        console.log(doc.data());
+                        temp = [...temp , doc.data()]
                     })
+                    temp.sort((a,b) => b.time - a.time)
+                    setUserComment(temp)                    
                 })
             })
         })
@@ -146,6 +154,11 @@ export default function MainPost() {
                 }
             </div>
             <CreatePost subpost={postId}/>
+            {
+                userComment.map((item,index) => {
+                    return <Post key={index} item={item}/>
+                })
+            }
           </div>
           <Search /> 
         </div>

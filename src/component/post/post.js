@@ -29,6 +29,7 @@ export default function Post({item}) {
   const [numberLike, setNumberLike] = useState(0)
   const [isRetweet, setIsRetweet] = useState(false)
   const [numberRetweet, setNumberRetweet] = useState(0)
+  const [numberComment, setNumberComment] = useState(0)
 
   const like = () => {
     firestore.collection('posts').doc(id)
@@ -37,7 +38,7 @@ export default function Post({item}) {
       date : new Date().valueOf(),
       uid : uid,
       id : id,
-      postId : item.uid
+      postId : item.postId
     })
 
     firestore.collection('users').doc(uid)
@@ -46,7 +47,7 @@ export default function Post({item}) {
       date : new Date().valueOf(),
       uid : uid,
       id : id,
-      postId : item.uid
+      postId : item.postId
     })
   }
 
@@ -57,7 +58,7 @@ export default function Post({item}) {
       date : new Date().valueOf(),
       uid : uid,
       id : id,
-      postId : item.uid
+      postId : item.postId
     })
 
     firestore.collection('users').doc(uid)
@@ -66,7 +67,7 @@ export default function Post({item}) {
       date : new Date().valueOf(),
       uid : uid,
       id : id,
-      postId : item.uid
+      postId : item.postId
     })
   }
 
@@ -120,15 +121,23 @@ export default function Post({item}) {
             if(doc.exists) setIsRetweet(true)
             else setIsRetweet(false)
           })
+
+          const numberCommentRef = firestore.collection('posts')
+                                  .where('subPostId' , '==' , item.postId)
+          numberCommentRef.onSnapshot(docs => {
+            setNumberComment(docs.size);
+          })
         })
       })
     })
+
     firestore.collection('users').doc(item.uid)
-    .onSnapshot(doc => {
+    .get().then(doc => {
       if(doc.data()){
         setUser(doc.data())
       }
     })
+    
   }, [])
 
   return (
@@ -173,9 +182,9 @@ export default function Post({item}) {
           )
         }
         
-        <div className={style.icon2} onClick={() => navigate(`/post/${item.postId}`)}>
+        <div className={style.icon2} onClick={() => window.location.href = `/post/${item.postId}` }>
           <FontAwesomeIcon icon={faComment} />
-          10
+          {numberComment}
         </div>
         {
           isLike ? (

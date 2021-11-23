@@ -12,8 +12,8 @@ export default function Index() {
 
   useEffect(() => {
     firestore.collection('posts')
-    .orderBy('time','desc')
-    .onSnapshot(docs => {
+    .orderBy('time','desc').onSnapshot(docs => {
+      setPost([])
       var temp = []
       docs.forEach(doc => {
         temp = [...temp , doc.data()]
