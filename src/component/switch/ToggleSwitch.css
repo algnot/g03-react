@@ -25,6 +25,7 @@
       /* height: fit-content; */
       display: flex;
       position: relative;
+      overflow-x: visible;
   }
   
   .toggle--checkbox {
