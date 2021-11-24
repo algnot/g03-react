@@ -3,6 +3,7 @@ import style from "./createpost.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImages , faTimes } from "@fortawesome/free-solid-svg-icons";
 import { auth, firestore ,storage } from '../../firebase/firebase';
+import sendNotification from './../../notification'
 
 export default function CreatePost({subpost}) {
   const inputRefMain = useRef()
@@ -42,8 +43,9 @@ export default function CreatePost({subpost}) {
       return
     }
     setOnUpload(true)
+    var random = Math.floor(Math.random() * 8999999999 + 1000000000);
     firestore.collection('posts').add({
-      postId : Math.floor(Math.random() * 8999999999 + 1000000000),
+      postId : random,
       subPostId : parseInt(subpost),
       uid : user.uid,
       text : textPost,
@@ -54,7 +56,15 @@ export default function CreatePost({subpost}) {
       setOnUpload(false)
       removeImg()
       setTextPost('')
-      // window.location.reload()
+      if(parseInt(subpost)!=0){
+        firestore.collection('posts').where('postId','==',parseInt(subpost))
+        .get().then(docs => {
+          docs.forEach(doc => {
+            if(doc.data().uid != user.uid)
+              sendNotification(doc.data().uid,`${user.username} reply to you!`,new Date().valueOf(),user.photoURL,`/post/${random}`)
+          })
+        })
+      }
     })
     .catch(() => {
       setOnUpload(false)
@@ -90,7 +100,7 @@ export default function CreatePost({subpost}) {
     <div className={style.container} style={{opacity:onUpload ? 0.5 : 1}}>
       <div className={style.imgContainer}>
         <div className={style.imgProfile}
-             style={{backgroundImage:`url(${user.photoURL})`}}></div>
+             style={{backgroundImage:`url(${typeof user.photoURL != 'undefined' ? user.photoURL : ''})`}}></div>
       </div>
       <div className={style.from}>
         <textarea rows="2" placeholder={`What's on your mind, ${user.username}?`}  
@@ -115,7 +125,6 @@ export default function CreatePost({subpost}) {
             <div className={style.icons}>
               <FontAwesomeIcon icon={faImages} 
                                onClick={() => inputRefMain.current.click()}/>
-              {/* <FontAwesomeIcon icon={faSmile} /> */}
             </div>
             <div className={style.btn}
                  onClick={onPost}>Tweet</div>

@@ -9,12 +9,26 @@ import Search from '../../component/search/search';
 import { useParams } from "react-router-dom";
 import { auth, firestore } from '../../firebase/firebase';
 import Post from '../../component/post/post';
+import sendNotification from '../../notification';
 
 export default function User(){
   const { uid } = useParams();
   let navigate = useNavigate();
  
   const [userInfo, setUserInfo] = useState({
+    uid : '',
+    username : '',
+    email : '',
+    photoURL : '',
+    coverPhotoURL : '',
+    created : '',
+    role : '',
+    follower : [],
+    following : [],
+    title : ''
+  })
+
+  const [viewUser, setViewUser] = useState({
     uid : '',
     username : '',
     email : '',
@@ -53,6 +67,7 @@ export default function User(){
         date : new Date().valueOf()
       })
     })
+    sendNotification(uid,`${viewUser.username} is follow you!`,new Date().valueOf(),viewUser.photoURL,`/u/${viewUser.uid}`)
   }
 
   const unFollow = () => {
@@ -83,6 +98,10 @@ export default function User(){
                     navigate('/')
                 }
             })    
+            firestore.collection('users').doc(user.uid)
+            .get().then(doc => {
+              setViewUser(doc.data())
+            })
           }
           firestore.collection('users').doc(uid)
           .collection('follower').doc(user.uid)

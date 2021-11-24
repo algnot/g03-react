@@ -41,7 +41,7 @@
 
 .subPostContainer:hover{
     background: var(--back-bg);
-}
+} 
 
 .userTitle2{
     font-size: 1.1rem;
@@ -106,6 +106,65 @@
     background-position: center;
     margin-left: 65px;
     margin-top: 10px;
+}
+
+.icons{
+    margin-left: 65px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.icon1Active{
+    color: #87CEFA;
+    transform: scale(1.1);
+}
+
+.icon1Active , .icon2Active , .icon3Active {
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+    transition: 0 all;
+}
+
+.icon1 svg , .icon2 svg , .icon3 svg , .icon1Active svg , .icon2Active svg , .icon3Active svg{
+    font-size: 1.3rem;
+}
+
+.icon1:hover{
+    color: #87CEFA;
+    transform: scale(1.1);
+}
+.icon2:hover{
+    color: #00FA9A;
+    transform: scale(1.1);
+}
+.icon3:hover{
+    color: #DC143C; 
+    transform: scale(1.1);
+}
+
+.icon3Active{
+    color: #DC143C;
+    transform: scale(1.1);
+}
+
+.icon3Active:hover{
+    transform: scale(1);
+}
+
+.icon1Active:hover{
+    transform: scale(1);
+}
+
+
+.icon1 , .icon2 , .icon3 {
+    display: flex;
+    gap: 10px;
+    color: var(--light-text);
+    cursor: pointer;
+    transition: 0 all;
 }
 
 @media (max-width:1350px) {

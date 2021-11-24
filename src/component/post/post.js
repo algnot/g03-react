@@ -5,6 +5,7 @@ import { faRetweet, faComment, faHeart } from "@fortawesome/free-solid-svg-icons
 import { auth, firestore } from '../../firebase/firebase';
 import Image from './../showImage/Image'
 import { useNavigate } from "react-router-dom"
+import sendNotification from '../../notification';
  
 export default function Post({item}) {
   let navigate = useNavigate();
@@ -30,6 +31,7 @@ export default function Post({item}) {
   const [isRetweet, setIsRetweet] = useState(false)
   const [numberRetweet, setNumberRetweet] = useState(0)
   const [numberComment, setNumberComment] = useState(0)
+  const [userSubpost, setUserSubpost] = useState('')
 
   const like = () => {
     firestore.collection('posts').doc(id)
@@ -48,6 +50,12 @@ export default function Post({item}) {
       uid : uid,
       id : id,
       postId : item.postId
+    })
+
+    firestore.collection('users').doc(uid)
+    .get().then(doc => {
+      if(item.uid != doc.data().uid)
+        sendNotification(item.uid , `${doc.data().username} liked your tweet!`,new Date().valueOf(),doc.data().photoURL,`/post/${item.postId}`)
     })
   }
 
@@ -69,6 +77,13 @@ export default function Post({item}) {
       id : id,
       postId : item.postId
     })
+    
+    firestore.collection('users').doc(uid)
+    .get().then(doc => {
+      if(item.uid != doc.data().uid)
+        sendNotification(item.uid , `${doc.data().username} retweete your tweet!`,new Date().valueOf(),doc.data().photoURL,`/post/${item.postId}`)
+    })
+    
   }
 
   const unRetweet = () => {
@@ -89,46 +104,73 @@ export default function Post({item}) {
     .delete()
   }
 
+  const convertTime = (time) => {
+    var sec = Math.floor(new Date().valueOf() - time) / 1000
+    var min = Math.floor(sec/60)
+    var hour = Math.floor(min/60)
+    var day = Math.floor(hour/24)
+
+    var date = new Date(time).getDate()
+    var month_name = ["January","February","March","April","May","June","July","August","September","October","November","Decemter"]
+    var monthD = new Date(time).getMonth()
+    var year = new Date(time).getFullYear()
+
+    if(sec < 60) {
+      return `${parseInt(sec)} seconds ago`
+    }
+    else if(min < 60) {
+      return `${parseInt(min)} minutes ago`
+    }
+    else if(hour < 24){
+      return `${parseInt(hour)} hours ago`
+    }
+    else if(day < 3){
+      return `${parseInt(day)} days ago`
+    }
+    else {
+      return `${date} ${month_name[monthD]} ${year}`
+    }
+  }
+
   useEffect(() => {
     auth.onAuthStateChanged(user => {
       if(user) {
         setUid(user.uid)
-      }
-      const postRef = firestore.collection('posts').where('postId','==',item.postId).limit(1)
-      postRef.onSnapshot( docs => {
-        docs.forEach(doc => {
-          setId(doc.id)
-          const isLikeRef = firestore.collection('posts').doc(doc.id)
-                                 .collection('like').doc(user.uid)
-          const numberLikeRef = firestore.collection('posts').doc(doc.id)
-                                 .collection('like')
-          numberLikeRef.onSnapshot(docs => {
-            setNumberLike(docs.size)
-          })
-          isLikeRef.onSnapshot(doc => {
-            if(doc.exists) setIsLike(true)
-            else setIsLike(false)
-          })
+        const postRef = firestore.collection('posts').where('postId','==',item.postId).limit(1)
+        postRef.onSnapshot( docs => {
+          docs.forEach(doc => {
+            setId(doc.id)
+            const isLikeRef = firestore.collection('posts').doc(doc.id)
+                                   .collection('like').doc(user.uid)
+            const numberLikeRef = firestore.collection('posts').doc(doc.id)
+                                   .collection('like')
+            numberLikeRef.onSnapshot(docs => {
+              setNumberLike(docs.size)
+            })
+            isLikeRef.onSnapshot(doc => {
+              if(doc.exists) setIsLike(true)
+              else setIsLike(false)
+            })
 
-          const isRetweetRef = firestore.collection('posts').doc(doc.id)
-                                 .collection('retweet').doc(user.uid)
-          const numberRetweetRef = firestore.collection('posts').doc(doc.id)
-                                 .collection('retweet')
-          numberRetweetRef.onSnapshot(docs => {
-            setNumberRetweet(docs.size)
-          })
-          isRetweetRef.onSnapshot(doc => {
-            if(doc.exists) setIsRetweet(true)
-            else setIsRetweet(false)
-          })
-
-          const numberCommentRef = firestore.collection('posts')
-                                  .where('subPostId' , '==' , item.postId)
-          numberCommentRef.onSnapshot(docs => {
-            setNumberComment(docs.size);
+            const isRetweetRef = firestore.collection('posts').doc(doc.id)
+                                   .collection('retweet').doc(user.uid)
+            const numberRetweetRef = firestore.collection('posts').doc(doc.id)
+                                   .collection('retweet')
+            numberRetweetRef.onSnapshot(docs => {
+              setNumberRetweet(docs.size)
+            })
+            isRetweetRef.onSnapshot(doc => {
+              if(doc.exists) setIsRetweet(true)
+              else setIsRetweet(false)
+            })
+            const numberCommentRef = firestore.collection('posts')
+                                    .where('subPostId' , '==' , item.postId)
+            numberCommentRef.onSnapshot(docs => {
+              setNumberComment(docs.size);
+            })
           })
         })
-      })
+      }
     })
 
     firestore.collection('users').doc(item.uid)
@@ -136,6 +178,17 @@ export default function Post({item}) {
       if(doc.data()){
         setUser(doc.data())
       }
+    })
+
+    firestore.collection('posts').where('postId','==',item.subPostId)
+    .get().then(docs => {
+      docs.forEach(doc => {
+        var uid = doc.data().uid
+        firestore.collection('users').doc(uid)
+        .get().then(doc => {
+          setUserSubpost(doc.data().username)
+        })
+      })
     })
     
   }, [])
@@ -152,7 +205,14 @@ export default function Post({item}) {
         </div>
         <div className={style.userTitle}>
           <div className={style.userName}>{user.username}</div>
-          <div className={style.time}>{item.time}</div>
+          <div className={style.time}>{convertTime(item.time)}</div>
+          {
+            item.subPostId != 0 && (
+              <div className={style.reply}>
+                {`Replying to ${userSubpost}`} 
+              </div>
+            )
+          }
         </div>
       </div>
       <div className={style.postInfo} onClick={() => navigate(`/post/${item.postId}`)}>

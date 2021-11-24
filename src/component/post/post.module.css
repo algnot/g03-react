@@ -80,6 +80,10 @@
     transform: scale(1.1);
 }
 
+.icon1Active:hover{
+    transform: scale(1);
+}
+
 .icon3Active:hover{
     transform: scale(1);
 }
@@ -126,3 +130,6 @@
 }
 
 
+.reply{
+    color: var(--bold);
+}

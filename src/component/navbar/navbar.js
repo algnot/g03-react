@@ -8,6 +8,7 @@ import { auth, firestore } from '../../firebase/firebase';
 import ConfirmAleart from '../confirmAlert/confirmAlert'
 import { keepTheme } from "./../../theme/theme"
 import { useNavigate } from "react-router-dom"
+import Notification from '../notification/notification';
 
 export default function Navbar() {
     let navigate = useNavigate();
@@ -32,10 +33,14 @@ export default function Navbar() {
 
     const logout = () => {
         auth.signOut()
+        .then(() => {
+            navigate('/login')
+        })
     }
 
     return (
         <>
+        <Notification />
         {
             displayAlert && 
             <ConfirmAleart Topic={username}
@@ -58,11 +63,11 @@ export default function Navbar() {
                     </Link>
                     <Link to="/message" className={style.navbarLink}>
                         <FontAwesomeIcon icon={faCommentAlt} />
-                        <div className={style.textLink}>Message</div>
+                        <div className={style.textLink}>Messages</div>
                     </Link>
                     <Link to="/notification" className={style.navbarLink}>
                         <FontAwesomeIcon icon={faBell} />
-                        <div className={style.textLink}>Notification</div>
+                        <div className={style.textLink}>Notifications</div>
                     </Link>
                     <div to="/profile" className={style.navbarLink}
                           onClick={() => setDisplayAlert(true)}>
