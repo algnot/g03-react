@@ -17,7 +17,10 @@ body {
   margin: 0;
   padding: 0;
   transition: .2s ease;
-  /* overflow-x: hidden; */
+  word-wrap: break-word;
+  pointer-events: auto;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {

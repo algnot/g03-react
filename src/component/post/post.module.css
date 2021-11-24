@@ -54,8 +54,10 @@
     text-align: justify;
     color: var(--light-text);
     word-break: break-all;
-    overflow-wrap: inherit;
-    /* overflow-wrap: break-word; */
+    /* overflow-wrap: inherit; */
+    word-wrap: break-word;
+    pointer-events: auto;
+    overflow-wrap: break-word;
 }
 
 .icon1:hover{
