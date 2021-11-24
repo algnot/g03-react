@@ -18,6 +18,7 @@ export default function Notification() {
           docs.forEach(doc => {
             temp = [...temp , doc.data()]
           })
+          temp.sort((a,b) => b.time - a.time)
           setNotification(temp)
         })
       }
