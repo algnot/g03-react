@@ -95,9 +95,9 @@
     margin-left: 65px;
     font-size: 1.4rem;
     color: var(--light-text);
-    word-wrap: break-word;
     pointer-events: auto;
     overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 .previewImg{

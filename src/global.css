@@ -20,7 +20,7 @@ body {
   word-wrap: break-word;
   pointer-events: auto;
   overflow-wrap: break-word;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 ::-webkit-scrollbar {
