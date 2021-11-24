@@ -32,7 +32,8 @@ export default function CreatePost({subpost}) {
       if(user){
         firestore.collection('users').doc(user.uid)
         .onSnapshot(doc => {
-          setUser(doc.data())
+          if(doc.data())
+            setUser(doc.data())
         })
       }
     })
@@ -100,7 +101,7 @@ export default function CreatePost({subpost}) {
     <div className={style.container} style={{opacity:onUpload ? 0.5 : 1}}>
       <div className={style.imgContainer}>
         <div className={style.imgProfile}
-             style={{backgroundImage:`url(${typeof user.photoURL != 'undefined' ? user.photoURL : ''})`}}></div>
+             style={{backgroundImage:`url(${user.photoURL})`}}></div>
       </div>
       <div className={style.from}>
         <textarea rows="2" placeholder={`What's on your mind, ${user.username}?`}  

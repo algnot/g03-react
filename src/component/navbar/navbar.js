@@ -34,7 +34,7 @@ export default function Navbar() {
     const logout = () => {
         auth.signOut()
         .then(() => {
-            navigate('/login')
+            window.location.href = '/login'
         })
     }
 

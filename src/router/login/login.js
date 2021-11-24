@@ -102,10 +102,12 @@ export default function Login() {
                     <div className={style.textInput}>Email</div>
                     <input value={email} 
                            type="text"
+                           className={styleLogin.input}
                            onChange={(e) => setEmail(e.target.value)} />
                     <div className={style.textInput}>Password</div>
                     <input value={password} 
                            type="password"
+                           className={styleLogin.input}
                            onChange={(e) => setPassword(e.target.value)} />
                     <div className={style.btnAvtive}
                          onClick={login}>Login</div>
