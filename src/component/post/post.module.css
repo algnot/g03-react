@@ -51,7 +51,11 @@
     margin-top: 14px;
     margin-left: 65px;
     font-size: 1.4rem;
+    text-align: justify;
     color: var(--light-text);
+    word-break: break-all;
+    overflow-wrap: inherit;
+    /* overflow-wrap: break-word; */
 }
 
 .icon1:hover{
@@ -115,6 +119,10 @@
     font-size: 1.3rem;
 }
 
+.reply{
+    color: var(--bold);
+}
+
 @media (max-width:750px) {
     .previewImg{
         margin-left: 0;
@@ -122,14 +130,14 @@
 
     .postInfo{
         margin-left: 0;
+        display: block;
     }
 
     .icons{
         margin-left: 0;
     }
-}
 
-
-.reply{
-    color: var(--bold);
+    .container{
+        width: calc(100vw - 60px);
+    }
 }
