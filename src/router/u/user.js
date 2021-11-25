@@ -47,7 +47,6 @@ export default function User(){
   const [follower, setFollower] = useState(0)
   const [following, setFollowing] = useState(0)
   const [isFollowing, setIsFollowing] = useState(0)
-
   const [postShow, setPostShow] = useState([])
   const [statusPage, setStatusPage] = useState(1)
 
@@ -253,10 +252,10 @@ export default function User(){
               }
             
               
-              <span className={style.btnEdit2}
+              {/* <span className={style.btnEdit2}
                     onClick={() => navigate(`/m/${uid}`)}>
                 message
-              </span>
+              </span> */}
             </div>
             <div className={style.profileInformation}>
               <div className={style.username}>{userInfo.username}</div>

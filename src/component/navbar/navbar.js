@@ -9,12 +9,14 @@ import ConfirmAleart from '../confirmAlert/confirmAlert'
 import { keepTheme } from "./../../theme/theme"
 import { useNavigate } from "react-router-dom"
 import Notification from '../notification/notification';
+import Loading from './../loading/Loading'
 
 export default function Navbar() {
     let navigate = useNavigate();
 
     const [username, setUsername] = useState(null)
     const [displayAlert, setDisplayAlert] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         keepTheme();
@@ -26,6 +28,9 @@ export default function Navbar() {
                 .onSnapshot( doc => {
                     if(doc.data())
                         setUsername(doc.data().username.split(' ')[0] ? doc.data().username.split(' ')[0] : doc.data().username)
+                    setTimeout(() => {
+                       setLoading(false) 
+                    }, 1000);
                 })
             }
         })
@@ -40,6 +45,10 @@ export default function Navbar() {
 
     return (
         <>
+        {
+            loading &&
+            <Loading />
+        }
         <Notification />
         {
             displayAlert && 
@@ -61,10 +70,10 @@ export default function Navbar() {
                         <FontAwesomeIcon icon={faHome} />
                         <div className={style.textLink}>Home</div>
                     </Link>
-                    <Link to="/message" className={style.navbarLink}>
+                    {/* <Link to="/message" className={style.navbarLink}>
                         <FontAwesomeIcon icon={faCommentAlt} />
                         <div className={style.textLink}>Messages</div>
-                    </Link>
+                    </Link> */}
                     <Link to="/notification" className={style.navbarLink}>
                         <FontAwesomeIcon icon={faBell} />
                         <div className={style.textLink}>Notifications</div>

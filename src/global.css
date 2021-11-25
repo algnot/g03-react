@@ -46,7 +46,7 @@ a{
 
 .theme-dark {
   --light-text: #F9F8F8;
-  --light-bg: hsl(206, 72%, 11%);
+  --light-bg: #081F30;
   --back-bg: #051a2b;
   --link-hover: rgb(56, 71, 80);  
   --border : #776666;
