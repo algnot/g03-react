@@ -46,7 +46,7 @@ export default function Register() {
 
         if(password != confirmPassword) {
             setDisplayAlert(true);
-            setTextAlert("Please enter your password!");
+            setTextAlert("Passwords did not match!");
             return;
         }
 
