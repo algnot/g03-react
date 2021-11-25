@@ -1,6 +1,7 @@
 import React , {useEffect,useState} from 'react'
 import { auth, firestore } from '../../firebase/firebase'
 import style from './notification.module.css'
+import { Helmet } from 'react-helmet'
 
 export default function Notification() {
 
@@ -10,6 +11,7 @@ export default function Notification() {
     const [img, setImg] = useState('')
 
     const [display, setDisplay] = useState(false)
+    const [title, setTitle] = useState('G03 - project')
 
     useEffect(() => {
         auth.onAuthStateChanged(user => {
@@ -27,11 +29,13 @@ export default function Notification() {
                         setMessage(doc.data().message)
                         setLink(doc.data().link)
                         setImg(doc.data().img)
+                        setTitle(`G03 - ${doc.data().message}`)
                         setTimeout(() => {
                             setDisplay(false)
                             notificationRef.update({
                                 read : true
                             })
+                            setTitle('G03 - project')
                         },5000)
                     }
                 })
@@ -69,6 +73,9 @@ export default function Notification() {
 
     return (
         <>
+        <Helmet>
+          <title>{ title }</title>
+        </Helmet>
         {
             display && (
                 <div className={style.container}
