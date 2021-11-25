@@ -35,6 +35,14 @@
     cursor: pointer;
 }
 
+.navbarLink2{
+    display: none;
+}
+
+.navbarLink2 svg{
+    font-size: 26px;
+}
+
 .navbarLink svg{
     font-size: 26px;
 }
@@ -71,6 +79,7 @@
 }
 
 @media (max-width:750px) {
+
     .container{
         padding: 0;
         bottom: 0;

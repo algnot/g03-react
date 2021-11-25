@@ -1,0 +1,76 @@
+.container{
+    margin-left: 25px;
+}
+.container input{
+    width: 80%;
+    height: 30px;
+    border-radius: 30px;
+    border: 1px solid var(--border);
+    padding-left: 25px;
+    margin-top: 20px;
+    font-size: 1rem;
+}
+.container input:focus{
+    outline: none; 
+}
+
+.searchContainer{
+    border-radius: 25px;
+    width: 80%;
+    padding: 10px 20px;
+    background: var(--back-bg);
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.friendBox{
+    border-radius: 25px;
+    width: 80%;
+    padding: 20px;
+    background: var(--back-bg);
+}
+
+.friendBoxText{
+    color: var(--light-text);
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.user{
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    padding: 5px 8px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.user:hover{
+    background-color: var(--light-bg);
+}
+
+.userImg{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.userName{
+    font-size: 1.1rem;
+    color: var(--light-text);
+    font-weight: bold;
+}
+
+.userEmail{
+    font-weight: 400;
+    color: var(--bold);
+}
+
+@media (max-width:1350px) {
+    .container{
+      /* display: none; */
+    }
+}

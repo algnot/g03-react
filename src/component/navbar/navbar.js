@@ -1,7 +1,7 @@
 import React , { useEffect,useState } from 'react'
 import style from './navbar.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome , faUser , faCommentAlt , faBell } from '@fortawesome/free-solid-svg-icons'
+import { faHome , faUser , faCommentAlt , faBell, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
 import ToggleSwitch from '../switch/switch';
 import { auth, firestore } from '../../firebase/firebase';
@@ -70,10 +70,10 @@ export default function Navbar() {
                         <FontAwesomeIcon icon={faHome} />
                         <div className={style.textLink}>Home</div>
                     </Link>
-                    {/* <Link to="/message" className={style.navbarLink}>
-                        <FontAwesomeIcon icon={faCommentAlt} />
-                        <div className={style.textLink}>Messages</div>
-                    </Link> */}
+                    <Link to="/search" className={style.navbarLink || style.navbarLink2}>
+                        <FontAwesomeIcon icon={faSearch} />
+                        <div className={style.textLink}>Search</div>
+                    </Link>
                     <Link to="/notification" className={style.navbarLink}>
                         <FontAwesomeIcon icon={faBell} />
                         <div className={style.textLink}>Notifications</div>

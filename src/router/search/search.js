@@ -1,8 +1,9 @@
-import React , {useEffect,useState} from 'react'
+import React  , {useEffect,useState} from 'react'
+import Navbar from '../../component/navbar/navbar'
 import { auth, firestore } from '../../firebase/firebase'
 import style from './search.module.css'
 
-export default function Search() {
+export default function SearchMain() {
 
     const [text, setText] = useState('')
 
@@ -51,7 +52,11 @@ export default function Search() {
     }, [])
 
     return (
-        <div className={style.container}>
+      <div>
+        <Navbar />
+        <div className="content">
+          <div style={{display:'block'}}>
+          <div className={style.container}>
             <input className={style.searchInput}
                    placeholder="Search.."
                    onChange={(e) => onSearch(e.target.value)}
@@ -69,7 +74,7 @@ export default function Search() {
                                          style={{backgroundImage:`url('${item.photoURL ? item.photoURL : 'https://firebasestorage.googleapis.com/v0/b/g03-project.appspot.com/o/u%2Fbasic_img%2Fmain%2Fimages.jpg?alt=media&token=d3f747ad-71ab-4014-b67d-7c235fc980d4'}')`}}>
                                     </div>
                                     <div className={style.userName}>
-                                        {item.username}
+                                        {item.username.length > 15 ? item.username.substring(0, 15)+'..' : item.username}
                                         <div className={style.userEmail}>
                                         {item.email.length > 15 ? item.email.substring(0, 15)+'..' : item.email}
                                         </div>
@@ -105,7 +110,8 @@ export default function Search() {
                 }
             </div>
         </div>
+          </div>
+        </div>
+      </div>
     )
 }
-
-

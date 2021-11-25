@@ -13,6 +13,7 @@ import Post from './router/post/post';
 import Notification from './router/notifacation/notification'
 import Message from './router/message/message';
 import M from './router/m/m'
+import Search from './router/search/search';
 
 import {
   BrowserRouter,
@@ -30,6 +31,7 @@ ReactDOM.render(
         <Route path="/message" element={<Message />} />
         <Route path="/m/:uid" element={<M />} />
         <Route path="/notification" element={<Notification />} />
+        <Route path="/search" element={<Search />} />
         <Route path="/u/:uid" element={<User />} />
         <Route path="/post/:postId" element={<Post />} />
         <Route path="/following/:uid" element={<Following />} />
