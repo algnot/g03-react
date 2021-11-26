@@ -1,11 +1,11 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyDbqrkhgFJFDmDjHsJJ03EzQiOHjgl-7bE",
-    authDomain: "g03-project-a2b20.firebaseapp.com",
-    projectId: "g03-project-a2b20",
-    storageBucket: "g03-project-a2b20.appspot.com",
-    messagingSenderId: "324568495295",
-    appId: "1:324568495295:web:132cac9dab9d032d83820a",
-    measurementId: "G-B6NE5VR8R3"
+    apiKey: "AIzaSyCwjcVN1Fu8mgqjwMfHvgC7yZOrm3AX3QA",
+    authDomain: "g03-project.firebaseapp.com",
+    projectId: "g03-project",
+    storageBucket: "g03-project.appspot.com",
+    messagingSenderId: "448620988863",
+    appId: "1:448620988863:web:5b8ce009a16c9c434af90a",
+    measurementId: "G-W002QVV3JQ"
 };
 
 module.exports = {
