@@ -1,4 +1,3 @@
-//G03-Project 
 # G03-Project 
 Social media that lets you meet new friends, post messages, like, comment and follow your favorite people. or let others follow your story
 # Table of content
