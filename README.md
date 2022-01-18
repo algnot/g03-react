@@ -30,7 +30,7 @@ npm run deploy
 - You can search for friends in the search bar.
 - There is a menu of notifications when someone follows you. Like or comment on your posts.
 # Author
-1. Siravit Dontumpa
+1. Siravit Dontumpai
 2. Thanut Sukprasertsom
 3. Khetsophon Sukpaiboonwat
 4. Thananop Nunthapornniracha
